@@ -56,11 +56,17 @@ set hidden
 set undofile
 set undodir=~/.vim/undo
 
-au FileType html setlocal tabstop=2 softtabstop=2 shiftwidth=2 expandtab
-au FileType javascript setlocal tabstop=2 softtabstop=2 shiftwidth=2 expandtab
+augroup html
+	autocmd!
+	au FileType html setlocal tabstop=2 softtabstop=2 shiftwidth=2 expandtab
+	au FileType javascript setlocal tabstop=2 softtabstop=2 shiftwidth=2 expandtab
+augroup END
 
-au FileType java setlocal omnifunc=javacomplete#Complete
-au FileType java set makeprg=javac\ %
-au FileType java nmap <leader>c :make<cr> 
-au FileType java nmap <leader>r :!java %:r<cr>
+augroup java
+	autocmd!
+	au FileType java setlocal omnifunc=javacomplete#Complete
+	au FileType java set makeprg=javac\ %
+	au FileType java nmap <leader>c :make<cr>
+	au FileType java nmap <leader>r :!java %:r<cr>
+augroup END
 
