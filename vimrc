@@ -70,3 +70,7 @@ augroup java
 	au FileType java nmap <leader>r :!java %:r<cr>
 augroup END
 
+augroup vim
+	autocmd!
+	autocmd FileType vim setlocal keywordprg=:help
+augroup END
