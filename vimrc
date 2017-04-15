@@ -9,7 +9,6 @@ Plugin 'tpope/vim-sensible'
 Plugin 'tpope/vim-surround'
 Plugin 'fatih/vim-go'
 Plugin 'mattn/emmet-vim'
-Plugin 'artur-shaik/vim-javacomplete2'
 Plugin 'altercation/vim-colors-solarized'
 Plugin '1995eaton/vim-better-javascript-completion'
 call vundle#end()
@@ -63,14 +62,6 @@ augroup html
 	autocmd!
 	au FileType html setlocal tabstop=2 softtabstop=2 shiftwidth=2 expandtab
 	au FileType javascript setlocal tabstop=2 softtabstop=2 shiftwidth=2 expandtab
-augroup END
-
-augroup java
-	autocmd!
-	au FileType java setlocal omnifunc=javacomplete#Complete
-	au FileType java set makeprg=javac\ %
-	au FileType java nmap <leader>c :make<cr>
-	au FileType java nmap <leader>r :!java %:r<cr>
 augroup END
 
 augroup vim
