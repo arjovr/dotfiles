@@ -7,8 +7,7 @@ Plugin 'VundleVim/Vundle.vim'
 Plugin 'tpope/vim-fugitive'
 Plugin 'tpope/vim-sensible'
 Plugin 'tpope/vim-surround'
-Plugin 'tpope/vim-dispatch'
-Plugin 'faith/vim-go'
+Plugin 'fatih/vim-go'
 Plugin 'mattn/emmet-vim'
 Plugin 'artur-shaik/vim-javacomplete2'
 Plugin 'altercation/vim-colors-solarized'
@@ -24,37 +23,41 @@ let mapleader = ","
 
 let g:go_fmt_command = "goimports"
 let g:go_def_mode = 'godef'
-
-au FileType go nmap <Leader>i <Plug>(go-info)
-au FileType go nmap <Leader>r <Plug>(go-rename)
-au FileType go nmap <Leader>s <Plug>(go-implements)
-au FileType go nmap <leader>b <Plug>(go-install)
-au FileType go nmap <leader>t <Plug>(go-test)
-au FileType go nmap <leader>tt <Plug>(go-test-compile)
-au FileType go nmap <leader>d <Plug>(go-def)
-au FileType go setlocal shiftwidth=4 tabstop=4 softtabstop=4 noexpandtab
-
 let g:go_list_type = "quickfix"
 
 augroup go
     autocmd!
-    autocmd Filetype go command! -bang A call go#alternate#Switch(<bang>0, 'edit')
-    autocmd Filetype go command! -bang AV call go#alternate#Switch(<bang>0, 'vsplit')
-    autocmd Filetype go command! -bang AS call go#alternate#Switch(<bang>0, 'split')
+    au FileType go nmap <Leader>i <Plug>(go-info)
+    au FileType go nmap <Leader>r <Plug>(go-rename)
+    au FileType go nmap <Leader>s <Plug>(go-implements)
+    au FileType go nmap <leader>b <Plug>(go-install)
+    au FileType go nmap <leader>t <Plug>(go-test)
+    au FileType go nmap <leader>tt <Plug>(go-test-compile)
+    au FileType go nmap <leader>d <Plug>(go-def)
+
+    au FileType go setlocal shiftwidth=4 tabstop=4 softtabstop=4 noexpandtab
+
+    au Filetype go command! -bang A call go#alternate#Switch(<bang>0, 'edit')
+    au Filetype go command! -bang AV call go#alternate#Switch(<bang>0, 'vsplit')
+    au Filetype go command! -bang AS call go#alternate#Switch(<bang>0, 'split')
 augroup END
 
-set relativenumber
-set number
 set autowrite
 
 au BufReadPost *.qtpl set ft=html
+au BufReadPost *.tpl set ft=html
 
 nmap gc :e ~/.vimrc<cr>
 nmap gb :b#<cr>
+nmap <leader>gs :Gstatus<cr>
+nnoremap <leader>,co :copen<cr>
+nnoremap <leader>,cn :cnext<cr>
+nnoremap <leader>,cp :cprev<cr>
 
 set hidden
 set undofile
 set undodir=~/.vim/undo
+set path+=**
 
 augroup html
 	autocmd!
@@ -74,3 +77,10 @@ augroup vim
 	autocmd!
 	autocmd FileType vim setlocal keywordprg=:help
 augroup END
+
+vnoremap // y/<c-r>"<cr>
+nnoremap ,w <c-w>
+command! W w !sudo tee % > /dev/null
+
+let g:netrw_list_hide= '.*\.swp$'
+
