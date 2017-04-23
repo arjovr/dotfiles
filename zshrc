@@ -19,7 +19,8 @@ compinit
 zstyle ':completion:*' menu select
 
 promptinit
-prompt clint
+source ~/dotfiles/sjf.zsh
+prompt sjf
 
 autoload -Uz up-line-or-beginning-search down-line-or-beginning-search
 zle -N up-line-or-beginning-search

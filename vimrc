@@ -1,3 +1,7 @@
+" Setup:
+" mkdir -p ~/.vim/bundle
+" git clone https://github.com/VundleVim/Vundle.vim .vim/bundle/Vundle.vim
+
 set nocompatible
 filetype off " required
 
