@@ -13,9 +13,9 @@ HISTFILE=$HOME/.zsh_history
 SAVEHIST=10000
 HISTSIZE=10000
 
-path=(/home/sjf/bin $path $PLAN9/bin)
+path=($HOME/bin $path $PLAN9/bin)
 
-eval $(dircolors dircolors.ansi-light)
+eval $(dircolors ~/dotfiles/dircolors.ansi-light)
 alias ls='ls --color'
 
 # Enable color in grep
