@@ -15,6 +15,7 @@ Plugin 'fatih/vim-go'
 Plugin 'mattn/emmet-vim'
 Plugin 'altercation/vim-colors-solarized'
 Plugin '1995eaton/vim-better-javascript-completion'
+Plugin 'junegunn/vim-easy-align'
 call vundle#end()
 filetype plugin indent on
 
@@ -64,8 +65,13 @@ set path+=**
 
 augroup html
 	autocmd!
-	au FileType html setlocal tabstop=2 softtabstop=2 shiftwidth=2 expandtab
-	au FileType javascript setlocal tabstop=2 softtabstop=2 shiftwidth=2 expandtab
+	au FileType html setlocal tabstop=4 softtabstop=4 shiftwidth=4 expandtab
+	au FileType javascript setlocal tabstop=4 softtabstop=4 shiftwidth=4 expandtab
+augroup END
+
+augroup php
+	autocmd!
+	au FileType php setlocal tabstop=4 softtabstop=4 shiftwidth=4 expandtab
 augroup END
 
 augroup vim

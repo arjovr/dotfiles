@@ -38,7 +38,8 @@ setopt SHARE_HISTORY
 setopt EXTENDED_HISTORY
 setopt INC_APPEND_HISTORY
 
-
 alias tree="ls -R | grep ":$" | sed -e 's/:$//' -e 's/[^-][^\/]*\//--/g' -e 's/^/   /' -e 's/-/|/'"
 alias dus='du -sckx * | sort -nr'
 
+setopt auto_cd
+cdpath=(/var/www/html)
