@@ -43,3 +43,6 @@ alias dus='du -sckx * | sort -nr'
 
 setopt auto_cd
 cdpath=(/var/www/html)
+
+set -o emacs
+
