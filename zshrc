@@ -45,4 +45,3 @@ setopt auto_cd
 cdpath=(/var/www/html)
 
 set -o emacs
-
