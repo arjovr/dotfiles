@@ -1,3 +1,8 @@
+" Setup:
+" mkdir -p ~/.vim/pack/minpac/opt
+" cd ~/.vim/pack/minpac/opt
+" git clone https://github.com/k-takata/minpac.git minpac
+
 set nocompatible
 
 packadd minpac
@@ -26,8 +31,6 @@ augroup go
     au FileType go nmap <leader>t <Plug>(go-test)
     au FileType go nmap <leader>tt <Plug>(go-test-compile)
     au FileType go nmap <leader>d <Plug>(go-def)
-    au FileType go nmap <c-w>] <Plug>(go-def)
-    au FileType go nmap ,w] <Plug>(go-def)
     au FileType go set foldmethod=syntax
     au FileType go setlocal shiftwidth=4 tabstop=4 softtabstop=4 noexpandtab
     au Filetype go command! -bang A call go#alternate#Switch(<bang>0, 'edit')
@@ -49,8 +52,13 @@ set path+=**
 
 augroup html
 	autocmd!
-	au FileType html setlocal tabstop=2 softtabstop=2 shiftwidth=2 expandtab
-	au FileType javascript setlocal tabstop=2 softtabstop=2 shiftwidth=2 expandtab
+	au FileType html setlocal tabstop=4 softtabstop=4 shiftwidth=4 expandtab
+	au FileType javascript setlocal tabstop=4 softtabstop=4 shiftwidth=4 expandtab
+augroup END
+
+augroup php
+	autocmd!
+	au FileType php setlocal tabstop=4 softtabstop=4 shiftwidth=4 expandtab
 augroup END
 
 augroup vim
@@ -67,4 +75,3 @@ let g:netrw_banner = 0
 
 set ignorecase
 set smartcase
-
