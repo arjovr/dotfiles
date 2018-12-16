@@ -1,5 +1,6 @@
 # disable ctrl-s and ctrl-q
 stty -ixon
+ttyctl -f
 
 # Set SSH to use gpg-agent
 unset SSH_AGENT_PID
@@ -13,35 +14,41 @@ export GPG_TTY=$(tty)
 # Refresh gpg-agent tty in case user switches into an X session
 (gpg-connect-agent updatestartuptty /bye >/dev/null &)
 
+setopt HIST_IGNORE_DUPS
+HISTFILE=~/.histfile
+HISTSIZE=1000
+SAVEHIST=1000
 
-autoload -Uz compinit promptinit
+autoload -Uz compinit vcs_info edit-command-line zkbd
 compinit
-zstyle ':completion:*' menu select
 
-promptinit
-source ~/dotfiles/sjf.zsh
-prompt sjf
+zstyle ':completion:*' rehash true
+zstyle ':vcs_info:git*' formats "(%s) [%b]"
 
-autoload -Uz up-line-or-beginning-search down-line-or-beginning-search
-zle -N up-line-or-beginning-search
-zle -N down-line-or-beginning-search
+precmd() {
+	vcs_info
+	print -Pn "\e]2;%n@%m %~ ${vcs_info_msg_0_} \a"
+	PS1="%n@%m:%~ ${vcs_info_msg_0_}"$'\n'"%f:; "
+}
 
-bindkey '^p' up-line-or-beginning-search
-bindkey '^n' down-line-or-beginning-search
+# Keyboard
+bindkey -e
+zle -N edit-command-line
+bindkey '^xe' edit-command-line
+bindkey '^x^e' edit-command-line
+
+# home, end key
+bindkey "\033[H" beginning-of-line
+bindkey "\033[F" end-of-line
 
 
-setopt HIST_IGNORE_DUPS          # Don't record an entry that was just recorded again.
-setopt HIST_IGNORE_ALL_DUPS      # Delete old recorded entry if new entry is a duplicate.
-setopt HIST_SAVE_NO_DUPS
-setopt HIST_VERIFY 
-setopt SHARE_HISTORY
-setopt EXTENDED_HISTORY
-setopt INC_APPEND_HISTORY
+# aliases
+# programs configuration
+alias registration_conf="ssh  -t lilith '/home/sjf/bin/registration_conf tflz'"
+eval $(dircolors ~/dotfiles/dircolors.ansi-light)
+alias ls='ls --color=auto'
+alias lh='ls -lh'
+alias grep='grep --color=auto'
+LESS='--ignore-case --raw-control-chars'
+PAGER='less'
 
-alias tree="ls -R | grep ":$" | sed -e 's/:$//' -e 's/[^-][^\/]*\//--/g' -e 's/^/   /' -e 's/-/|/'"
-alias dus='du -sckx * | sort -nr'
-
-setopt auto_cd
-cdpath=(/var/www/html)
-
-set -o emacs
