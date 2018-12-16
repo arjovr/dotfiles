@@ -24,6 +24,7 @@ compinit
 
 zstyle ':completion:*' rehash true
 zstyle ':vcs_info:git*' formats "(%s) [%b]"
+zstyle ':vcs_info:git*' actionformats "(%s) [%b|%a]"
 
 precmd() {
 	vcs_info
@@ -45,7 +46,7 @@ bindkey "\033[F" end-of-line
 # aliases
 # programs configuration
 alias registration_conf="ssh  -t lilith '/home/sjf/bin/registration_conf tflz'"
-eval $(dircolors ~/dotfiles/dircolors.ansi-light)
+eval $(dircolors)
 alias ls='ls --color=auto'
 alias lh='ls -lh'
 alias grep='grep --color=auto'
