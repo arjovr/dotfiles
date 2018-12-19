@@ -2,6 +2,18 @@
 stty -ixon
 ttyctl -f
 
+# Set SSH to use gpg-agent
+unset SSH_AGENT_PID
+if [ "${gnupg_SSH_AUTH_SOCK_by:-0}" -ne $$ ]; then
+	export SSH_AUTH_SOCK="/run/user/$EUID/gnupg/S.gpg-agent.ssh"
+fi
+
+# Set GPG TTY
+export GPG_TTY=$(tty)
+
+# Refresh gpg-agent tty in case user switches into an X session
+(gpg-connect-agent updatestartuptty /bye >/dev/null &)
+
 setopt HIST_IGNORE_DUPS
 HISTFILE=~/.histfile
 HISTSIZE=1000
@@ -26,10 +38,10 @@ zle -N edit-command-line
 bindkey '^xe' edit-command-line
 bindkey '^x^e' edit-command-line
 
-# home, end key
+# home, end key, delete key
 bindkey "\033[H" beginning-of-line
 bindkey "\033[F" end-of-line
-
+bindkey "^[[P"   delete-char
 
 # aliases
 # programs configuration
