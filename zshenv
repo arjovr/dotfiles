@@ -10,5 +10,5 @@ export LANG=en_US.UTF-8
 export LANGUAGE=en_US.UTF-8
 export LD_LIBRARY_PATH=$HOME/lib
 export EDITOR=vim
-
+export GOPATH=$HOME
 
