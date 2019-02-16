@@ -3,6 +3,8 @@ set nocompatible
 set autoread
 
 " PLUGINS
+" First you must:
+" git clone https://github.com/k-takata/minpac.git ~/.vim/pack/minpac/opt/minpac
 packadd minpac
 call minpac#init()
 call minpac#add('k-takata/minpac', {'type': 'opt'})
@@ -12,7 +14,7 @@ call minpac#add('tpope/vim-fugitive')
 " Colors
 syntax on
 filetype plugin on
-colo nofrils-dark
+" colo nofrils-dark
 
 " FINDING FILES
 set cdpath +=~/src,**
