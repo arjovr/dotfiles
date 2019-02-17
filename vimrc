@@ -10,11 +10,13 @@ call minpac#init()
 call minpac#add('k-takata/minpac', {'type': 'opt'})
 call minpac#add('robertmeta/nofrils')
 call minpac#add('tpope/vim-fugitive')
+call minpac#add('fatih/vim-go')
+call minpac#add('SirVer/ultisnips')
 
 " Colors
 syntax on
 filetype plugin on
-" colo nofrils-dark
+colo nofrils-dark
 
 " FINDING FILES
 set cdpath +=~/src,**
@@ -44,7 +46,7 @@ augroup END
 command! W w !sudo tee > /dev/null %
 
 " Open Config file
-nnoremap gv :e ~/.vim/vimrc<CR>
+nnoremap gc :e ~/.vim/vimrc<CR>
 
 " FORMAT
 set shiftwidth=4
