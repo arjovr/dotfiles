@@ -2,21 +2,12 @@
 set nocompatible
 set autoread
 
-" PLUGINS
-" First you must:
-" git clone https://github.com/k-takata/minpac.git ~/.vim/pack/minpac/opt/minpac
-packadd minpac
-call minpac#init()
-call minpac#add('k-takata/minpac', {'type': 'opt'})
-call minpac#add('robertmeta/nofrils')
-call minpac#add('tpope/vim-fugitive')
-call minpac#add('fatih/vim-go')
-call minpac#add('SirVer/ultisnips')
+" Plugins
+" set runtimepath ^=~/.vim/bundle/tabular
 
 " Colors
-syntax on
+syntax off
 filetype plugin on
-colo nofrils-dark
 
 " FINDING FILES
 set cdpath +=~/src,**
@@ -36,17 +27,12 @@ set smartcase
 nnoremap <C-n> :bnext<CR>
 nnoremap <C-p> :bprevious<CR>
 
-" GO
-augroup go
-	au FileType go  set tags+=~/pkg/tags,~/pkg/mod/tags
-augroup END
-
 " SUDO WRITE
 " Allow saving of files as sudo when I forgot to start vim using sudo.
 command! W w !sudo tee > /dev/null %
 
 " Open Config file
-nnoremap gc :e ~/.vim/vimrc<CR>
+nnoremap gc :e ~/.vimrc<CR>
 
 " FORMAT
 set shiftwidth=4
