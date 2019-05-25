@@ -1,6 +1,7 @@
 " BASIC SETUP
 set nocompatible
 set autoread
+set mouse=
 
 " Plugins
 " set runtimepath ^=~/.vim/bundle/tabular
