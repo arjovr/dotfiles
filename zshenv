@@ -3,7 +3,7 @@ typeset -U path
 
 export PLAN9=/usr/local/plan9
 
-path=($HOME/bin $path $PLAN9/bin)
+path=($HOME/bin $path $PLAN9/bin $HOME/node_modules/.bin)
 
 export LC_ALL=en_US.UTF-8
 export LANG=en_US.UTF-8

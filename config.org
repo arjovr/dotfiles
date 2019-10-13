@@ -244,6 +244,37 @@ Git timemachine
 			    (local-set-key (kbd "M-.") 'godef-jump)))
 
 #+END_SRC
+* Javascript
+
+#+BEGIN_SRC emacs-lisp
+
+  (setq-default js-indent-level 4)
+
+#+END_SRC
+
+* Web
+
+Necesitamos instalar para el web-beautify.
+
+#+BEGIN_SRC sh
+  npm install -g js-beautify
+#+END_SRC
+
+
+#+BEGIN_SRC emacs-lisp
+
+  (use-package web-mode
+    :ensure t
+    :mode ("\\.html\\'" "\\.tpl\\'")
+    :config
+    (setq web-mode-markup-indent-offset 4))
+
+  (use-package web-beautify
+    :ensure t)
+
+
+#+END_SRC
+
 * Export
 
 #+BEGIN_SRC emacs-lisp
