@@ -1,0 +1,201 @@
+
+* Configuracion de repositorios y paquetes
+
+Solo melpa.
+
+#+BEGIN_SRC emacs-lisp
+
+  (package-initialize)
+  (add-to-list 'package-archives '("melpa" . "http://melpa.org/packages/"))
+  (setq package-enable-at-startup nil)
+
+#+END_SRC
+
+#+RESULTS:
+
+Use-package
+
+#+BEGIN_SRC emacs-lisp
+
+  (unless (package-installed-p 'use-package)
+    (package-refresh-contents)
+    (package-install 'use-package))
+
+#+END_SRC
+
+#+RESULTS:
+
+Stop customize.
+
+#+BEGIN_SRC emacs-lisp
+
+  (setq custom-file (make-temp-file "emacs-custom"))
+
+#+END_SRC
+
+#+RESULTS:
+: /tmp/emacs-customJBj7oZ
+
+* Preferences
+
+#+BEGIN_SRC emacs-lisp
+
+  (setq inhibit-startup-screen t)
+  (menu-bar-mode -1)
+  (tool-bar-mode -1)
+  (scroll-bar-mode -1)
+  (setq-default ring-bell-function 'ignore)
+  (defalias 'yes-or-no-p 'y-or-n-p)
+  (blink-cursor-mode t)
+  (setq-default cursor-type 'bar)
+
+#+END_SRC
+
+Queremos reemplazar si tenemos una region seleccionada.
+
+#+BEGIN_SRC emacs-lisp
+
+(delete-selection-mode 1)
+
+#+END_SRC
+
+#+RESULTS:
+: bar
+
+* Auto save y backups
+
+#+BEGIN_SRC emacs-lisp
+
+  (setq auto-save-interval 20)
+  (setq backup-directory-alist
+	`(("." . ,(expand-file-name "~/.emacs.d/auto-save"))))
+
+  (setq backup-directory-alist `(("." . "~/.emacs.d/backups")))
+  (setq
+    backup-by-copying t     ; don't clobber symlinks
+    kept-new-versions 10    ; keep 10 latest versions
+    kept-old-versions 0     ; don't bother with old versions
+    delete-old-versions t   ; don't ask about deleting old versions
+    version-control t       ; number backups
+    vc-make-backup-files t) ; backup version controlled files
+
+
+#+END_SRC
+
+#+RESULTS:
+: t
+
+* Hooks
+
+#+BEGIN_SRC emacs-lisp
+
+  (add-hook 'before-save-hook 'delete-trailing-whitespace)
+
+#+END_SRC
+
+#+RESULTS:
+| delete-trailing-whitespace |
+
+* Completion framework
+
+#+BEGIN_SRC emacs-lisp
+
+  (use-package ivy
+      :ensure t
+      :diminish ivy-mode
+      :config
+      (ivy-mode t))
+
+
+#+END_SRC
+
+#+RESULTS:
+: t
+
+* Multiple cursors
+
+#+BEGIN_SRC emacs-lisp
+
+  (use-package multiple-cursors
+    :ensure t
+    :config
+    (global-set-key (kbd "C-S-c C-S-c") 'mc/edit-lines)
+    (global-set-key (kbd "C->") 'mc/mark-next-like-this)
+    (global-set-key (kbd "C-<") 'mc/mark-previous-like-this)
+    (global-set-key (kbd "C-c C-<") 'mc/mark-all-like-this))
+
+#+END_SRC
+
+#+RESULTS:
+: t
+
+* Autocomplete
+
+#+BEGIN_SRC emacs-lisp
+
+  (use-package company
+    :ensure t
+    :diminish
+    :config
+    (add-hook 'after-init-hook 'global-company-mode))
+
+    (setq company-idle-delay t)
+
+#+END_SRC
+
+* Snippets
+
+#+BEGIN_SRC emacs-lisp
+
+  (use-package yasnippet
+      :ensure t
+      :diminish yas-minor-mode
+      :config
+      (add-to-list 'yas-snippet-dirs "~/.emacs.d/snippets")
+      (yas-global-mode))
+
+#+END_SRC
+
+* Dired
+
+#+BEGIN_SRC emacs-lisp
+
+(setq dired-listing-switches "-alh")
+
+#+END_SRC
+
+* Magit
+
+#+BEGIN_SRC emacs-lisp
+  (use-package magit
+    :ensure t)
+#+END_SRC
+
+* Go
+
+#+BEGIN_SRC emacs-lisp
+    (use-package company-go
+      :ensure t
+      :config
+      (add-to-list 'company-backends 'company-go))
+
+  (use-package go-mode
+    :ensure t
+    :config
+    (local-set-key (kbd "M-.") 'godef-jump)
+    (add-hook 'before-save-hook 'gofmt-before-save)
+    (set-variable 'gofmt-command "goimports")
+    (setq compile-command "go install"))
+
+  (add-hook 'go-mode-hook (lambda ()
+			    (local-set-key (kbd "M-.") 'godef-jump)))
+
+#+END_SRC
+* Export
+
+#+BEGIN_SRC emacs-lisp
+
+(use-package htmlize
+:ensure t)
+
+#+END_SRC
