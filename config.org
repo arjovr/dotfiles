@@ -71,17 +71,17 @@ Queremos 'reemplazar' si tenemos una region seleccionada.
 #+BEGIN_SRC emacs-lisp
 
   (setq auto-save-interval 20)
-  (setq backup-directory-alist
-	`(("." . ,(expand-file-name "~/.emacs.d/auto-save"))))
+  (setq auto-save-file-name-transforms
+	`((".*" "~/.emacs.d/auto-save/" t)))
 
   (setq backup-directory-alist `(("." . "~/.emacs.d/backups")))
   (setq
-    backup-by-copying t     ; don't clobber symlinks
-    kept-new-versions 10    ; keep 10 latest versions
-    kept-old-versions 0     ; don't bother with old versions
-    delete-old-versions t   ; don't ask about deleting old versions
-    version-control t       ; number backups
-    vc-make-backup-files t) ; backup version controlled files
+   backup-by-copying t     ; don't clobber symlinks
+   kept-new-versions 10    ; keep 10 latest versions
+   kept-old-versions 0     ; don't bother with old versions
+   delete-old-versions t   ; don't ask about deleting old versions
+   version-control t       ; number backups
+   vc-make-backup-files t) ; backup version controlled files
 
 
 #+END_SRC
@@ -214,20 +214,18 @@ Git timemachine
 * Go
 
 #+BEGIN_SRC emacs-lisp
-    (use-package company-go
-      :ensure t
-      :config
-      (add-to-list 'company-backends 'company-go))
-
-  (use-package go-mode
+  (use-package company-go
     :ensure t
     :config
-    (local-set-key (kbd "M-.") 'godef-jump)
-    (add-hook 'before-save-hook 'gofmt-before-save)
-    (set-variable 'gofmt-command "goimports")
-    (setq compile-command "go install"))
+    (add-to-list 'company-backends 'company-go))
+
+  (use-package go-mode
+    :ensure t)
 
   (add-hook 'go-mode-hook (lambda ()
+			    (add-hook 'before-save-hook 'gofmt-before-save)
+			    (set-variable 'gofmt-command "goimports")
+			    (set-local compile-command "go install")
 			    (local-set-key (kbd "M-.") 'godef-jump)))
 
 #+END_SRC
