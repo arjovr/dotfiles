@@ -1,6 +1,20 @@
 
 * Configuracion de repositorios y paquetes
 
+Funcion para editar este archivo de configuracion
+
+#+BEGIN_SRC emacs-lisp
+
+  (defun find-config ()
+    "Edit config.org"
+    (interactive)
+    (find-file "~/dotfiles/config.org"))
+
+  (global-set-key (kbd "C-c I") 'find-config)
+
+
+#+END_SRC
+
 Solo melpa.
 
 #+BEGIN_SRC emacs-lisp
@@ -10,8 +24,6 @@ Solo melpa.
   (setq package-enable-at-startup nil)
 
 #+END_SRC
-
-#+RESULTS:
 
 Use-package
 
@@ -32,9 +44,6 @@ Stop customize.
   (setq custom-file (make-temp-file "emacs-custom"))
 
 #+END_SRC
-
-#+RESULTS:
-: /tmp/emacs-customJBj7oZ
 
 * Preferences
 
@@ -85,7 +94,7 @@ Queremos reemplazar si tenemos una region seleccionada.
 #+RESULTS:
 : t
 
-* Hooks
+* Whitespace
 
 #+BEGIN_SRC emacs-lisp
 
@@ -101,16 +110,12 @@ Queremos reemplazar si tenemos una region seleccionada.
 #+BEGIN_SRC emacs-lisp
 
   (use-package ivy
-      :ensure t
-      :diminish ivy-mode
-      :config
-      (ivy-mode t))
-
+    :ensure t
+    :diminish ivy-mode
+    :config
+    (ivy-mode t))
 
 #+END_SRC
-
-#+RESULTS:
-: t
 
 * Multiple cursors
 
@@ -143,9 +148,19 @@ Queremos reemplazar si tenemos una region seleccionada.
 
 #+END_SRC
 
+* Navigation
+
+  #+BEGIN_SRC emacs-lisp
+
+  (use-package avy
+    :ensure t
+    :bind (("M-s" . avy-goto-char-2)))
+
+  #+END_SRC
+
 * Snippets
 
-#+BEGIN_SRC emacs-lisp
+  #+BEGIN_SRC emacs-lisp
 
   (use-package yasnippet
       :ensure t
@@ -154,21 +169,59 @@ Queremos reemplazar si tenemos una region seleccionada.
       (add-to-list 'yas-snippet-dirs "~/.emacs.d/snippets")
       (yas-global-mode))
 
-#+END_SRC
+  #+END_SRC
 
 * Dired
 
 #+BEGIN_SRC emacs-lisp
 
-(setq dired-listing-switches "-alh")
+  (setq dired-listing-switches "-alh")
 
 #+END_SRC
 
-* Magit
+* Git
+
+Magit
 
 #+BEGIN_SRC emacs-lisp
   (use-package magit
     :ensure t)
+#+END_SRC
+
+Git timemachine
+
+#+BEGIN_SRC emacs-lisp
+
+  (use-package git-timemachine
+    :ensure t)
+
+#+END_SRC
+
+* Project management
+
+#+BEGIN_SRC emacs-lisp
+  (use-package projectile
+    :ensure t
+    :config
+    (projectile-mode))
+
+  (setq projectile-completion-system 'ivy)
+
+  (define-key projectile-mode-map (kbd "C-c p") 'projectile-command-map)
+
+#+END_SRC
+
+* Coding
+
+#+BEGIN_SRC emacs-lisp
+
+  (use-package smartparens
+    :ensure t
+    :diminish smartparens-mode
+    :config
+    (add-hook 'prog-mode-hook 'smartparens-mode))
+
+
 #+END_SRC
 
 * Go
