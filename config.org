@@ -215,6 +215,7 @@ Git timemachine
     :ensure t
     :diminish smartparens-mode
     :config
+    (show-smartparens-global-mode t)
     (add-hook 'prog-mode-hook 'smartparens-mode))
 
 #+END_SRC
