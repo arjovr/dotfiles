@@ -106,6 +106,14 @@ Eliminamos al guardar el espacio al final de las lineas.
     :config
     (ivy-mode t))
 
+  (use-package counsel
+    :ensure t
+    :config (counsel-mode t))
+
+  (use-package swiper
+    :ensure t
+    :config (global-set-key "\C-s" 'swiper))
+
 #+END_SRC
 
 * Multiple cursors
