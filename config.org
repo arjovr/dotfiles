@@ -66,6 +66,14 @@ Queremos 'reemplazar' si tenemos una region seleccionada.
 
 #+END_SRC
 
+Ibuffer
+
+#+BEGIN_SRC emacs-lisp
+
+(global-set-key (kbd "C-x C-b") 'ibuffer)
+
+#+END_SRC
+
 * Auto save y backups
 
 #+BEGIN_SRC emacs-lisp
@@ -113,6 +121,9 @@ Eliminamos al guardar el espacio al final de las lineas.
   (use-package swiper
     :ensure t
     :config (global-set-key "\C-s" 'swiper))
+
+  (use-package ivy-hydra
+    :ensure t)
 
 #+END_SRC
 
@@ -229,13 +240,13 @@ Git timemachine
     (add-to-list 'company-backends 'company-go))
 
   (use-package go-mode
-    :ensure t)
+    :ensure t
+    :bind (("M-." . godef-jump)))
 
   (add-hook 'go-mode-hook (lambda ()
 			    (add-hook 'before-save-hook 'gofmt-before-save)
 			    (set-variable 'gofmt-command "goimports")
-			    (set-local compile-command "go install")
-			    (local-set-key (kbd "M-.") 'godef-jump)))
+			    (set-local compile-command "go install")))
 
 #+END_SRC
 
