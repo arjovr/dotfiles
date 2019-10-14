@@ -52,3 +52,9 @@ alias lh='ls -lh'
 alias grep='grep --color=auto'
 LESS='--ignore-case --raw-control-chars'
 PAGER='less'
+
+[[ $TERM == "dumb" ]] && unsetopt zle && unfunction precmd  && PS1='$ ' && return
+
+
+
+
