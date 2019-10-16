@@ -45,7 +45,6 @@ bindkey "^[[P"   delete-char
 
 # aliases
 # programs configuration
-alias registration_conf="ssh  -t lilith '/home/sjf/bin/registration_conf tflz'"
 eval $(dircolors)
 alias ls='ls --color=auto'
 alias lh='ls -lh'
@@ -54,7 +53,3 @@ LESS='--ignore-case --raw-control-chars'
 PAGER='less'
 
 [[ $TERM == "dumb" ]] && unsetopt zle && unfunction precmd  && PS1='$ ' && return
-
-
-
-
