@@ -204,6 +204,28 @@ Git timemachine
 
 #+END_SRC
 
+* Spreadsheet
+
+#+BEGIN_SRC emacs-lisp
+
+  (use-package orgtbl-aggregate
+    :ensure t)
+
+#+END_SRC
+
+
+* Dumb Jump
+
+Instala ripgrep
+
+#+BEGIN_SRC emacs-lisp
+
+  (use-package dumb-jump
+    :ensure t
+    :bind (("M-g j" . dumb-jump-go)))
+
+#+END_SRC
+
 * Project management
 
 #+BEGIN_SRC emacs-lisp
@@ -246,6 +268,8 @@ Git timemachine
   (add-hook 'go-mode-hook (lambda ()
 			    (add-hook 'before-save-hook 'gofmt-before-save)
 			    (set-variable 'gofmt-command "goimports")
+			    (setq tab-width 4)
+			    (setq indent-tabs-mode 1)
 			    (set-local compile-command "go install")))
 
 #+END_SRC
