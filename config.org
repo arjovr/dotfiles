@@ -66,6 +66,14 @@ Queremos 'reemplazar' si tenemos una region seleccionada.
 
 #+END_SRC
 
+Desactivamos suspend
+
+#+BEGIN_SRC emacs-lisp
+
+(global-unset-key (kbd "C-z"))
+
+#+END_SRC
+
 Ibuffer
 
 #+BEGIN_SRC emacs-lisp
@@ -213,7 +221,6 @@ Git timemachine
 
 #+END_SRC
 
-
 * Dumb Jump
 
 Instala ripgrep
@@ -301,6 +308,11 @@ Necesitamos instalar para el web-beautify.
   (use-package web-beautify
     :ensure t)
 
+  (use-package emmet-mode
+    :ensure t)
+
+  (use-package company-web
+    :ensure t)
 
 #+END_SRC
 
